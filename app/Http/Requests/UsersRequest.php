@@ -28,8 +28,8 @@ class UsersRequest extends FormRequest
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
+            'is_active' => 'required',
             'role_id' => 'required',
-            'status' => 'required',
         ];
     }
 }
