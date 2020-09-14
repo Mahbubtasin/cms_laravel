@@ -15,6 +15,9 @@
                     @endif
 
                     You are logged in!
+{{--                    <div>--}}
+{{--                        <a href="{{url('admin')}}">Admin</a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>

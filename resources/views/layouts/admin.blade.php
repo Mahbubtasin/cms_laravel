@@ -24,6 +24,15 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+
+
 
 
 
@@ -48,54 +57,86 @@
 
 
 
-        <ul class="nav navbar-top-links navbar-right">
+{{--        <ul class="nav navbar-top-links navbar-right">--}}
 
 
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
+{{--            <!-- /.dropdown -->--}}
+{{--            <li class="dropdown">--}}
+{{--                <a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
+{{--                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>--}}
+{{--                </a>--}}
+{{--                <ul class="dropdown-menu dropdown-user">--}}
+{{--                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>--}}
+{{--                    </li>--}}
+{{--                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="divider"></li>--}}
+{{--                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--                <!-- /.dropdown-user -->--}}
+{{--            </li>--}}
+{{--            <!-- /.dropdown -->--}}
 
 
+{{--        </ul>--}}
+
+
+
+{{--        <ul class="nav navbar-nav navbar-right">--}}
+{{--            <!-- Authentication Links -->--}}
+{{--            @guest--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
+{{--                </li>--}}
+{{--                @if (Route::has('register'))--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
+{{--                    </li>--}}
+{{--                @endif--}}
+{{--            @else--}}
+{{--                <li class="nav-item dropdown">--}}
+{{--                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
+{{--                        {{ Auth::user()->name }} <span class="caret"></span>--}}
+{{--                    </a>--}}
+
+{{--                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
+{{--                        <a class="dropdown-item" href="{{ route('logout') }}"--}}
+{{--                           onclick="event.preventDefault();--}}
+{{--                                                     document.getElementById('logout-form').submit();">--}}
+{{--                            {{ __('Logout') }}--}}
+{{--                        </a>--}}
+
+{{--                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+{{--                            @csrf--}}
+{{--                        </form>--}}
+{{--                    </div>--}}
+{{--                </li>--}}
+{{--            @endguest--}}
+{{--        </ul>--}}
+
+
+
+
+        <ul class="nav navbar-nav navbar-right">
+        @if(auth()->guest())
+        @if(!Request::is('login'))
+        <li><a href="{{ route('login') }}">Login</a></li>
+        @endif
+        @if(!Request::is('register'))
+        <li><a href="{{ route('register') }}">Register</a></li>
+        @endif
+        @else
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+        <li><a href="{{ route('logout') }}">Logout</a></li>
+
+        <li><a href="{{ url('/admin/profile') }}/{{auth()->user()->id}}">Profile</a></li>
         </ul>
-
-
-
-
-
-
-        {{--<ul class="nav navbar-nav navbar-right">--}}
-        {{--@if(auth()->guest())--}}
-        {{--@if(!Request::is('auth/login'))--}}
-        {{--<li><a href="{{ url('/auth/login') }}">Login</a></li>--}}
-        {{--@endif--}}
-        {{--@if(!Request::is('auth/register'))--}}
-        {{--<li><a href="{{ url('/auth/register') }}">Register</a></li>--}}
-        {{--@endif--}}
-        {{--@else--}}
-        {{--<li class="dropdown">--}}
-        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>--}}
-        {{--<ul class="dropdown-menu" role="menu">--}}
-        {{--<li><a href="{{ url('/auth/logout') }}">Logout</a></li>--}}
-
-        {{--<li><a href="{{ url('/admin/profile') }}/{{auth()->user()->id}}">Profile</a></li>--}}
-        {{--</ul>--}}
-        {{--</li>--}}
-        {{--@endif--}}
-        {{--</ul>--}}
+        </li>
+        @endif
+        </ul>
 
 
 
@@ -123,11 +164,11 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>Users<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{url('admin/users')}}">All Users</a>
+                                <a href="{{route('users.index')}}">All Users</a>
                             </li>
 
                             <li>
-                                <a href="{{url('admin/users/create')}}">Create User</a>
+                                <a href="{{route('users.create')}}">Create User</a>
                             </li>
 
                         </ul>
