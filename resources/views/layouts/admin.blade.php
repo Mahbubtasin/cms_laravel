@@ -26,6 +26,9 @@
 
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+{{--    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>--}}
+{{--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>--}}
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -57,29 +60,37 @@
 
 
 
-{{--        <ul class="nav navbar-top-links navbar-right">--}}
+        <ul class="nav navbar-top-links navbar-right">
 
 
-{{--            <!-- /.dropdown -->--}}
-{{--            <li class="dropdown">--}}
-{{--                <a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
-{{--                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>--}}
-{{--                </a>--}}
-{{--                <ul class="dropdown-menu dropdown-user">--}}
-{{--                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>--}}
-{{--                    </li>--}}
-{{--                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>--}}
-{{--                    </li>--}}
-{{--                    <li class="divider"></li>--}}
-{{--                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
-{{--                <!-- /.dropdown-user -->--}}
-{{--            </li>--}}
-{{--            <!-- /.dropdown -->--}}
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> {{\Illuminate\Support\Facades\Auth::user()->name}} <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user" style="height: 115px">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                            <i class="fa fa-sign-out fa-fw"></i>
+                                    {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
 
 
-{{--        </ul>--}}
+        </ul>
 
 
 
@@ -118,28 +129,26 @@
 
 
 
-        <ul class="nav navbar-nav navbar-right">
-        @if(auth()->guest())
-        @if(!Request::is('login'))
-        <li><a href="{{ route('login') }}">Login</a></li>
-        @endif
-        @if(!Request::is('register'))
-        <li><a href="{{ route('register') }}">Register</a></li>
-        @endif
-        @else
-        <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-        <li><a href="{{ route('logout') }}">Logout</a></li>
-
-        <li><a href="{{ url('/admin/profile') }}/{{auth()->user()->id}}">Profile</a></li>
-        </ul>
-        </li>
-        @endif
-        </ul>
+{{--        <ul class="nav navbar-nav navbar-right">--}}
+{{--        @if(auth()->guest())--}}
+{{--        @if(!Request::is('login'))--}}
+{{--        <li><a href="{{ route('login') }}">Login</a></li>--}}
+{{--        @endif--}}
+{{--        @if(!Request::is('register'))--}}
+{{--        <li><a href="{{ route('register') }}">Register</a></li>--}}
+{{--        @endif--}}
+{{--        @else--}}
+{{--        <li class="dropdown">--}}
+{{--        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>--}}
+{{--        <ul class="dropdown-menu" role="menu">--}}
+{{--        <li><a href="{{ route('logout') }}">Logout</a></li>--}}
 
 
-
+{{--        <li><a href="{{ url('/admin/profile') }}/{{auth()->user()->id}}">Profile</a></li>--}}
+{{--        </ul>--}}
+{{--        </li>--}}
+{{--        @endif--}}
+{{--        </ul>--}}
 
 
         <div class="navbar-default sidebar" role="navigation">
@@ -179,11 +188,11 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/posts">All Posts</a>
+                                <a href="{{route('posts.index')}}">All Posts</a>
                             </li>
 
                             <li>
-                                <a href="/posts/create">Create Post</a>
+                                <a href="{{route('posts.create')}}">Create Post</a>
                             </li>
 
                         </ul>

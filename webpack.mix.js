@@ -33,4 +33,4 @@ mix.scripts([
     'resources/js/libs/sb-admin-2.js',
     'resources/js/libs/scripts.js'
 
-], 'public/js/libs.css')
+], 'public/js/libs.js')
