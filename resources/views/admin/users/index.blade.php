@@ -40,7 +40,6 @@
                 <td>{{$user->created_at->diffForHumans()}}</td>
                 <td>{{$user->updated_at->diffForHumans()}}</td>
                 <td>
-                    <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary">Edit</a> |
                     {!! Form::open(['method' => 'delete', 'action' => ['AdminUsersController@destroy', $user->id]]) !!}
                             <div class="form-group">
                                 {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
@@ -55,5 +54,5 @@
 
             </tbody>
     </table>
-    
+
 @endsection
