@@ -75,6 +75,7 @@ class AdminUsersController extends Controller
 
 //        User::create($request->all());
 
+        Session::flash('add_user', 'User added...');
 
         return redirect('admin/users');
     }

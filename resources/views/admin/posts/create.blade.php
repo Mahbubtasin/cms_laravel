@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
+    <h1>Post</h1>
+
     {!! Form::open(['method' => 'post', 'action' => 'AdminPostsController@store', 'files' => true]) !!}
             <div class="form-group">
                 {!! Form::label('title', 'Title', ['class' => 'control-label']) !!}

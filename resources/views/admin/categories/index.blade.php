@@ -1,10 +1,23 @@
 @extends('layouts.admin');
 
 @section('content')
+
+    @if (\Illuminate\Support\Facades\Session::has('deleted_category'))
+        <p class="alert alert-danger">{{session('deleted_category')}}</p>
+    @endif
+    @if (\Illuminate\Support\Facades\Session::has('updated_category'))
+        <p class="alert alert-success">{{session('updated_category')}}</p>
+    @endif
+    @if (\Illuminate\Support\Facades\Session::has('add_category'))
+        <p class="alert alert-success">{{session('add_category')}}</p>
+    @endif
+
+    <h1>Category</h1>
+
     <div class="card">
         {!! Form::open(['method' => 'post', 'action' => 'AdminCategoryController@store']) !!}
                 <div class="form-group">
-                    {!! Form::label('name', 'Category', ['class' => 'control-label']) !!}
+                    {!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
                     {!! Form::text('name', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">

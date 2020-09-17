@@ -7,6 +7,9 @@
     @if (\Illuminate\Support\Facades\Session::has('updated_user'))
         <p class="alert alert-success">{{session('updated_user')}}</p>
     @endif
+    @if (\Illuminate\Support\Facades\Session::has('add_user'))
+        <p class="alert alert-success">{{session('add_user')}}</p>
+    @endif
 
 
     <h1>Users</h1>

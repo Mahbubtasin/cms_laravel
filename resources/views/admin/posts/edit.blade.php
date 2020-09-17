@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
+    <h1>Edit Post</h1>
+
     <div class="row">
         <div class="col-sm-3">
             <img src="{{$posts->photo ? $posts->photo->file : 'http://placehold.it/400x400'}}" alt="" class="img-responsive img-rounded">

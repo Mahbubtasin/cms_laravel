@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminCategoryController extends Controller
 {
@@ -42,6 +43,8 @@ class AdminCategoryController extends Controller
     {
         //
         Category::create($request->all());
+
+        Session::flash('add_category', 'Category added...');
 
         return redirect('admin/category');
 
@@ -87,6 +90,8 @@ class AdminCategoryController extends Controller
 
         $categories->update($request->all());
 
+        Session::flash('updated_category', 'Category has been updated...');
+
         return redirect('admin/category');
     }
 
@@ -100,6 +105,8 @@ class AdminCategoryController extends Controller
     {
         //
         Category::find($id)->delete();
+
+        Session::flash('deleted_category', 'Category has been deleted...');
 
         return redirect('admin/category');
     }

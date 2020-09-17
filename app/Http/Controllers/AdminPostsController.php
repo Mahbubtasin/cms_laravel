@@ -8,6 +8,7 @@ use App\Photo;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminPostsController extends Controller
 {
@@ -60,6 +61,8 @@ class AdminPostsController extends Controller
             $store['photo_id'] = $photo->id;
         }
         $user->posts()->create($store);
+
+        Session::flash('add_post', 'Post added...');
 
         return redirect('admin/posts');
     }
@@ -114,6 +117,8 @@ class AdminPostsController extends Controller
         }
         $user->posts()->whereId($id)->first()->update($update);
 
+        Session::flash('updated_post', 'Post has been updated...');
+
         return redirect('admin/posts');
     }
 
@@ -127,8 +132,13 @@ class AdminPostsController extends Controller
     {
         //
         $post = Post::find($id);
+
         unlink(public_path() .$post->photo->file);
+
         $post->delete();
+
+        Session::flash('deleted_post', 'Post has been deleted...');
+
         return redirect('admin/posts');
     }
 }

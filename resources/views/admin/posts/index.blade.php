@@ -1,6 +1,19 @@
 @extends('layouts.admin')
 
 @section('content')
+
+    @if (\Illuminate\Support\Facades\Session::has('deleted_post'))
+        <p class="alert alert-danger">{{session('deleted_post')}}</p>
+    @endif
+    @if (\Illuminate\Support\Facades\Session::has('updated_post'))
+        <p class="alert alert-success">{{session('updated_post')}}</p>
+    @endif
+    @if (\Illuminate\Support\Facades\Session::has('add_post'))
+        <p class="alert alert-success">{{session('add_post')}}</p>
+    @endif
+
+    <h1>All Post</h1>
+
     <table class="table table-hover">
             <thead>
             <tr>
