@@ -141,4 +141,11 @@ class AdminPostsController extends Controller
 
         return redirect('admin/posts');
     }
+
+    public function post($id)
+    {
+        $post = Post::find($id);
+
+        return view('post', compact('post'));
+    }
 }
