@@ -14,6 +14,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Body</th>
                 <th scope="col">View</th>
+                <th scope="col">Reply</th>
                 <th scope="col">Confirm</th>
                 <th scope="col">Action</th>
             </tr>
@@ -26,8 +27,10 @@
                 <td>{{$comment->email}}</td>
                 <td>{{Str::limit($comment->body, 20)}}</td>
                 <td><a href="{{route('home.post', $comment->post->id)}}" class="btn btn-info">View Post</a></td>
+                <td><a href="{{route('replies.show', $comment->id)}}" class="btn btn-info">View Reply</a></td>
                 <td>
                     @if ($comment->is_active == 1)
+
                         {!! Form::open(['method' => 'patch', 'action' => ['PostsCommentController@update', $comment->id]]) !!}
                         <input type="hidden" name="is_active" value="0">
                                 <div class="form-group">
@@ -36,12 +39,14 @@
                         {!! Form::close() !!}
 
                     @else
+
                         {!! Form::open(['method' => 'patch', 'action' => ['PostsCommentController@update', $comment->id]]) !!}
                         <input type="hidden" name="is_active" value="1">
                         <div class="form-group">
                             {!! Form::submit('Approve', ['class' => 'btn btn-primary']) !!}
                         </div>
                         {!! Form::close() !!}
+
                     @endif
                 </td>
                 <td>

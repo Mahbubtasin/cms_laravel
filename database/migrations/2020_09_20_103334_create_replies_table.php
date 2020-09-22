@@ -20,6 +20,7 @@ class CreateRepliesTable extends Migration
             $table->string('author');
             $table->string('email');
             $table->text('body');
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

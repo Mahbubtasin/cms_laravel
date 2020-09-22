@@ -23,6 +23,8 @@
                 <th scope="col">Category</th>
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
+                <th scope="col">View</th>
+                <th scope="col">Comment</th>
                 <th scope="col">Created_at</th>
                 <th scope="col">Updated_at</th>
                 <th scope="col">Action</th>
@@ -39,6 +41,8 @@
                 <td>{{$post->category ? $post->category->name : 'No Category'}}</td>
                 <td><a href="{{route('posts.edit', $post->id)}}">{{$post->title}}</a></td>
                 <td>{{Str::limit($post->body, 20)}}</td>
+                <td><a href="{{route('home.post', $post->id)}}" class="btn btn-info">View Post</a></td>
+                <td><a href="{{route('comments.show', $post->id)}}" class="btn btn-success">View Comment</a></td>
                 <td>{{$post->created_at->diffForHumans()}}</td>
                 <td>{{$post->updated_at->diffForHumans()}}</td>
                 <td>

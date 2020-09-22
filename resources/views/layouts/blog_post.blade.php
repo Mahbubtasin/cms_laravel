@@ -130,6 +130,8 @@
 <!-- jQuery -->
 <link href="{{asset('js/libs.js')}}" rel="stylesheet">
 
+@yield('script')
+
 </body>
 
 </html>
