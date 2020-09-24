@@ -9,6 +9,10 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Str;
 
 class AdminPostsController extends Controller
 {
@@ -20,7 +24,7 @@ class AdminPostsController extends Controller
     public function index()
     {
         //
-        $posts = Post::all();
+        $posts = Post::paginate(5);
 
         return view('admin.posts.index', compact('posts'));
 
@@ -60,6 +64,7 @@ class AdminPostsController extends Controller
             $photo = Photo::create(['file' => $name]);
             $store['photo_id'] = $photo->id;
         }
+
         $user->posts()->create($store);
 
         Session::flash('add_post', 'Post added...');
@@ -142,9 +147,9 @@ class AdminPostsController extends Controller
         return redirect('admin/posts');
     }
 
-    public function post($id)
+    public function post($slug)
     {
-        $post = Post::find($id);
+        $post = Post::findBySlugOrFail($slug);
 
         $comments = $post->comment()->whereIsActive(1)->get();
 

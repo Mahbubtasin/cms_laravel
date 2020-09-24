@@ -58,4 +58,10 @@
             </tbody>
     </table>
 
+    <div class="row">
+        <div class="col-sm-offset-5">
+            {{$users->render()}}
+        </div>
+    </div>
+
 @endsection

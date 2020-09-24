@@ -41,7 +41,7 @@
                 <td>{{$post->category ? $post->category->name : 'No Category'}}</td>
                 <td><a href="{{route('posts.edit', $post->id)}}">{{$post->title}}</a></td>
                 <td>{{Str::limit($post->body, 20)}}</td>
-                <td><a href="{{route('home.post', $post->id)}}" class="btn btn-info">View Post</a></td>
+                <td><a href="{{route('home.post', $post->slug)}}" class="btn btn-info">View Post</a></td>
                 <td><a href="{{route('comments.show', $post->id)}}" class="btn btn-success">View Comment</a></td>
                 <td>{{$post->created_at->diffForHumans()}}</td>
                 <td>{{$post->updated_at->diffForHumans()}}</td>
@@ -58,5 +58,11 @@
             @endif
             </tbody>
     </table>
+
+    <div class="row">
+        <div class="col-sm-offset-5">
+            {{$posts->render()}}
+        </div>
+    </div>
 @stop
 

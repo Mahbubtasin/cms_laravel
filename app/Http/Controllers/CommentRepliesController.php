@@ -69,7 +69,7 @@ class CommentRepliesController extends Controller
         //
         $comment = Comment::find($id);
 
-        $replies = $comment->reply;
+        $replies = $comment->reply()->paginate(5);
 
         return view('admin.comments.replies.show', compact('replies'));
     }
@@ -96,6 +96,7 @@ class CommentRepliesController extends Controller
     {
         //
         Reply::find($id)->update($request->all());
+
         return redirect()->back();
     }
 

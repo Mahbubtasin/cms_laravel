@@ -56,5 +56,10 @@
                 </tbody>
         </table>
             @endif
+            <div class="row">
+                <div class="col-sm-offset-5">
+                    {{$categories->render()}}
+                </div>
+            </div>
     </div>
 @endsection

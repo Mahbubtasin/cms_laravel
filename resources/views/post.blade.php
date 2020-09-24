@@ -72,7 +72,7 @@
             <!-- Comment -->
                 <div class="media">
                     <a class="pull-left" href="#">
-                        <img class="media-object" src="{{$comment->photo ? $comment->photo : "http://placehold.it/64x64"}}" alt="" height="64px">
+                        <img class="media-object" src="{{$comment->photo ? \Illuminate\Support\Facades\Auth::user()->gravatar : "http://placehold.it/64x64"}}" alt="" height="64px">
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading">{{$comment->author}}

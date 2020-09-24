@@ -24,7 +24,7 @@
                     <td>{{$reply->author}}</td>
                     <td>{{$reply->email}}</td>
                     <td>{{Str::limit($reply->body, 20)}}</td>
-                    <td><a href="{{route('home.post', $reply->comment->post)}}" class="btn btn-info">View Post</a></td>
+                    <td><a href="{{route('home.post', $reply->comment->post->slug)}}" class="btn btn-info">View Post</a></td>
                     <td>
                         @if ($reply->is_active == 1)
 
@@ -57,6 +57,12 @@
                 @endforeach
                 </tbody>
         </table>
+
+        <div class="row">
+            <div class="col-sm-offset-5">
+                {{$replies->render()}}
+            </div>
+        </div>
 
     @else
         <h1 class="text-center">No Reply</h1>
