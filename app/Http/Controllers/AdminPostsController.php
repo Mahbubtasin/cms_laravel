@@ -153,6 +153,8 @@ class AdminPostsController extends Controller
 
         $comments = $post->comment()->whereIsActive(1)->get();
 
-        return view('post', compact('post', 'comments'));
+        $categories = Category::all();
+
+        return view('post', compact('post', 'comments', 'categories'));
     }
 }

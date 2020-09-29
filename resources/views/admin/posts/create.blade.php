@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+
     <h1>Post</h1>
 
     {!! Form::open(['method' => 'post', 'action' => 'AdminPostsController@store', 'files' => true]) !!}
@@ -28,3 +29,4 @@
     @include('includes.error')
 
 @stop
+

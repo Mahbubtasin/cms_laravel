@@ -20,6 +20,8 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "jquery": "^3.5.1"
+        "@ckeditor/ckeditor5-build-classic": "^22.0.0",
+        "jquery": "^3.5.1",
+        "tinymce": "^5.4.2"
     }
 }

@@ -11,22 +11,23 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 //Route::get('/home', 'AdminUsersController@index')->name('home');
 
 
 
 Route::group(['middleware' => 'admin'], function () {
 
-    Route::get('/admin', function () {
-        return view('admin.index');
-    });
+//    Route::get('/admin', function () {
+//        return view('admin.index');
+//    });
+    Route::get('/admin', 'AdminController@index');
 
     Route::resource('admin/users', 'AdminUsersController');
 
@@ -35,6 +36,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('admin/category', 'AdminCategoryController');
 
     Route::resource('admin/media', 'AdminMediaController');
+
+    Route::delete('delete/media', 'AdminMediaController@deleteMedia');
 
     Route::resource('admin/comments', 'PostsCommentController');
 
